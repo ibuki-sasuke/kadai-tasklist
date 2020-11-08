@@ -47,8 +47,17 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+#Heroku 上で、 PostgreSQL を使用するために下記を編集
+#production:
+#  <<: *default
+#  database: tasklist_production
+#  username: tasklist
+#  password: <%= ENV['TASKLIST_DATABASE_PASSWORD'] %>
+
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: tasklist_production
   username: tasklist
   password: <%= ENV['TASKLIST_DATABASE_PASSWORD'] %>
