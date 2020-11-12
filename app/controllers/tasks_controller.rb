@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
   
   def index
     @tasks = Task.all
@@ -38,6 +37,7 @@ class TasksController < ApplicationController
       flash[:success] = 'Task は正常に更新されました'
       redirect_to @task
     else
+      @task = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Task は更新されませんでした'
       render :edit
     end
