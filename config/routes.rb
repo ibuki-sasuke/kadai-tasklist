@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   root to: 'toppages#index'
 #  root to: 'tasks#index' トップページを追加するため、削除
   
-  resources :tasks
+  get 'signup', to: 'users#new'
+  resources :users, only: [:index, :show, :new, :create]
+#  resources :tasks トップページを追加するため、削除
 end
